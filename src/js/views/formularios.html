@@ -1,0 +1,268 @@
+<div class="oj-hybrid-padding">
+    <div class="oj-flex-item" >
+
+        <div class="oj-panel oj-panel-shadow-lg oj-bg-brand-30 oj-sm-margin-4x demo-mypanel" >
+
+
+            <!-- INICIO DATOS PERSONALES DIFUNTO -->
+            <div class="oj-panel oj-panel-shadow-sm oj-bg-brand-30 oj-sm-margin-4x demo-mypanel">
+                <div class="oj-hybrid-padding">
+                    <label class="titulo-identificacion" for="">Datos personales del difunto</label>
+                </div>
+                <oj-form-layout 
+                    id="formularioDatosPersonalesDifunto"
+                    label-edge="top"
+                    max-columns="3"
+                    direction="row" >
+    
+                    <oj-input-text
+                        id="f1"
+                        label-hint="Primer Apellido"
+                        label-edge="inside"
+                        placeholder='Digite el primer apellido del difunto'
+                        help.instruction="Digite el primer apellido del difunto"
+                        required
+                    ></oj-input-text>
+                    
+                    <oj-input-text
+                        id="f2"
+                        label-hint="Segundo Apellido"
+                        label-edge="inside"
+                        placeholder='Digite el segundo apellido del difunto'
+                        help.instruction="Digite el segundo apellido del difunto"
+                        required
+                    ></oj-input-text>
+    
+                    <oj-input-text
+                        id="f3"
+                        label-hint="Segundo Apellido"
+                        label-edge="inside"
+                        placeholder='Digite el segundo apellido del difunto'
+                        help.instruction="Digite el segundo apellido del difunto"
+                        required
+                    ></oj-input-text>
+    
+                    <oj-radioset 
+                        id="f4"
+                        label-hint="Sexo"
+                        label-edge="inside"
+                        required
+                        aria-controls="formularioDatosPersonalesDifunto"
+                        class='oj-choice-direction-row' >
+                        <oj-option value="F">Mujer</oj-option>
+                        <oj-option value="M">Hombre</oj-option>
+                    </oj-radioset>
+    
+                    <oj-input-date 
+                        id="f5" 
+                        label-edge="inside"
+                        label-hint="Fecha de nacimiento" 
+                        required
+                        placeholder='dd/mm/yy'
+                    ></oj-input-date>
+    
+                    <oj-select-one 
+                        id="f6"             
+                        value=""
+                        label-edge="inside"
+                        label-hint="Estado Civil" 
+                        required
+                        style="max-width:20em" >
+                        <oj-option value="" ></oj-option>
+                        <oj-option value="01">01 - Soltero/a</oj-option>
+                        <oj-option value="02">02 - Casado/a</oj-option>
+                        <oj-option value="03">03 - Unión libre o unión de hecho</oj-option>
+                        <oj-option value="04">04 - Separado/a</oj-option>
+                        <oj-option value="05">05 - Divorciado/a</oj-option>
+                        <oj-option value="06">06 - Viudo/a</oj-option>
+                    </oj-select-one>
+    
+                    <oj-input-text
+                        id="f7"
+                        label-hint="Ocupación"
+                        label-edge="inside"
+                        placeholder='Digite el código o nombre de la profesión del difunto'
+                        help.instruction="Digite el código o nombre de la profesión del difunto"
+                        required
+                    ></oj-input-text>
+                    
+                </oj-form-layout>
+            </div>
+            <!-- FIN DATOS PERSONALES DIFUNTO -->
+
+            <!-- INICIO DATOS RESIDENCIA DIFUNTO -->
+            <div class="oj-panel oj-panel-shadow-sm oj-bg-brand-30 oj-sm-margin-4x demo-mypanel">
+                <div class="oj-hybrid-padding">
+                    <label class="titulo-identificacion" for="">Datos de Residencia del difunto</label>
+                </div>
+                <oj-form-layout 
+                    id="formularioDatosPersonalesDifunto"
+                    label-edge="top"
+                    max-columns="3"
+                    direction="row" >
+    
+                    <oj-select-single 
+                        data="[[browsersDP]]"
+                        label-edge="inside"
+                        label-hint="País de residencia"
+                        placeholder='País de residencia'
+                        required
+                    ></oj-select-single>
+                    
+                    <oj-select-single 
+                        data="[[browsersDP]]"
+                        label-edge="inside"
+                        label-hint="Departamento de residencia"
+                        placeholder='Departamento de residencia'
+                        required
+                    ></oj-select-single>
+
+                    <oj-select-single 
+                        data="[[browsersDP]]"
+                        label-edge="inside"
+                        label-hint="Municipio de residencia"
+                        placeholder='Municipio de residencia'
+                        required
+                    ></oj-select-single>
+
+                    <oj-select-single 
+                        data="[[browsersDP]]"
+                        label-edge="inside"
+                        label-hint="División municipal"
+                        placeholder='División municipal'
+                        required
+                    ></oj-select-single>
+
+                    <oj-input-text
+                        label-edge="inside"
+                        label-hint="Dirección"
+                        placeholder='Dirección'
+                        help.instruction="Dirección"
+                        required
+                    ></oj-input-text>
+                    
+                </oj-form-layout>
+            </div>
+            <!-- FIN DATOS RESIDENCIA DIFUNTO -->
+
+            <!-- INICIO DATOS COMPANIERO HOGAR -->
+            <div class="oj-panel oj-panel-shadow-sm oj-bg-brand-30 oj-sm-margin-4x demo-mypanel">
+                <div class="oj-hybrid-padding">
+                    <label class="titulo-identificacion" for="">Datos de Residencia del difunto</label>
+                </div>
+                <oj-form-layout 
+                    id="formularioDatosPersonalesDifunto"
+                    label-edge="top"
+                    max-columns="2"
+                    direction="row" >
+
+                    <oj-input-text
+                        label-edge="inside"
+                        label-hint="Número de Identificación"
+                        placeholder='Número de Identificación'
+                        help.instruction="Número de Identificación"
+                        required
+                    ></oj-input-text>
+                    
+                    <div class="oj-flex" style="gap: 1rem;">
+                        <oj-button id='button1' >
+                            <span><oj-bind-text value="Cargar"></oj-bind-text></span>
+                        </oj-button>
+                        <oj-button id="button2" >
+                            <span><oj-bind-text value="Buscar"></oj-bind-text></span>
+                        </oj-button>    
+                    </div>
+
+                    <oj-select-single 
+                        data="[[browsersDP]]"
+                        label-edge="inside"
+                        label-hint="Nacionalidad del Compañero de Hogar"
+                        placeholder='Nacionalidad del Compañero de Hogar'
+                        required
+                    ></oj-select-single>
+
+                    <oj-input-text
+                        label-edge="inside"
+                        label-hint="Nombres y Apellidos del Compañaero de Hogar"
+                        placeholder='Nombres y Apellidos del Compañaero de Hogar'
+                        help.instruction="Nombres y Apellidos del Compañaero de Hogar"
+                        required
+                    ></oj-input-text>
+                    
+                    <oj-select-single 
+                        data="[[browsersDP]]"
+                        label-edge="inside"
+                        label-hint="Estatus de Vivencia"
+                        placeholder='Estatus de Vivencia'
+                        required
+                    ></oj-select-single>
+
+                </oj-form-layout>
+            </div>
+            <!-- FIN DATOS COMPANIERO HOGAR -->
+
+        </div >
+        
+        <!-- INICIO ACCIONES -->
+        <div class="oj-panel oj-panel-shadow-lg oj-bg-brand-30 oj-sm-margin-4x demo-mypanel">
+            <div class="oj-hybrid-padding">
+                <label class="titulo-identificacion" for="">Acciones</label>
+            </div>
+            <div class="oj-flex oj-flex-items-end" style="gap: 1rem; justify-content: center;">
+                <oj-button id="button1" >
+                    <span><oj-bind-text value="Imágenes de actas"></oj-bind-text></span>
+                </oj-button>    
+                <oj-button id="button2" >
+                    <span><oj-bind-text value="Cancelar Actas"></oj-bind-text></span>
+                </oj-button>    
+                <oj-button id="button3" >
+                    <span><oj-bind-text value="Activar Actas"></oj-bind-text></span>
+                </oj-button>       
+            </div>
+        </div>
+        <!-- FIN ACCIONES -->
+
+        <div class="contenedorLineas">
+            <div class="rojo" ></div>
+            <div class="naranja" ></div>
+            <div class="azul" ></div>
+            <div class="verde" ></div>
+        </div>
+
+        <div class="oj-flex contenedorAcciones" >
+            <div class="contendorGuardar">
+                <div class="oj-flex oj-flex-items-end" style="gap: 1rem;">
+                    <oj-button id="button1" >
+                        <span><oj-bind-text value="Guardar"></oj-bind-text></span>
+                    </oj-button>    
+                </div>
+            </div>
+            <div class="contenedorNumeroRecibo">
+                <oj-form-layout 
+                    id="formularioDatosPersonalesDifunto"
+                    label-edge="start"
+                    max-columns="2"
+                    direction="row" >
+
+                    <oj-input-text
+                        label-hint="Número de recibo"
+                        placeholder='Número de recibo'
+                        required
+                    ></oj-input-text>
+
+                    <div class="oj-flex " style="gap: 1rem;">
+                        <oj-button id="button1" >
+                            <span><oj-bind-text value="Imprimir"></oj-bind-text></span>
+                        </oj-button>    
+                        <oj-button id="button2" >
+                            <span><oj-bind-text value="Cancelar"></oj-bind-text></span>
+                        </oj-button>       
+                    </div>
+
+                </oj-form-layout>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="oj-hybrid-padding">
+    <div class="oj-flex-item" >
+        
+        <!-- INICIO IDENTIFICACION DEFUNCION -->
+        <div class="oj-panel oj-panel-shadow-sm oj-bg-brand-30 oj-sm-margin-4x demo-mypanel">
+            <div class="oj-hybrid-padding">
+                <label class="titulo-identificacion" for="">Identificación de defunción</label>
+            </div>
+            <oj-form-layout 
+                user-assistance-density="compact"
+                id="myform"
+                label-edge="top"
+                columns="2"
+                max-columns="2"
+                direction="column" >
+
+                <div >
+                    <oj-input-text
+                        start-icon="fa fa-search"
+                        label-hint="Departamento"
+                        label-edge="inside"
+                        placeholder='Digite el código nombre del departamento'
+                        help.instruction="Digite el código nombre del departamento"
+                        required
+                    ></oj-input-text>
+                    <!-- <span><i class="fa fa-search"></i></span> -->
+                </div>
+                
+                <oj-input-text
+                    label-hint="Municipio"
+                    label-edge="inside"
+                    placeholder='Digite el código nombre del Municipio de residencia'
+                    help.instruction="Digite el código nombre del Municipio de residencia"
+                    required
+                ></oj-input-text>
+
+                <oj-input-number
+                    min="0"
+                    label-edge="inside"
+                    label-hint="Año de Inscripción"
+                    placeholder='Digite el año de inscripción'
+                    help.instruction="Digite el año de inscripción"
+                    required
+                ></oj-input-number>
+        
+                <oj-input-number 
+                    min="0"
+                    label-edge="inside"
+                    label-hint="Número de acta"
+                    placeholder='Digite el número de acta'
+                    help.instruction="Digite el número de acta"
+                    required
+                ></oj-input-number>
+            </oj-form-layout>
+            <div class="oj-flex oj-flex-items-end" style="gap: 1rem; justify-content: flex-end;">
+                <oj-button id='button2' >
+                    <span><oj-bind-text value="Cargar"></oj-bind-text> <i class="fa fa-search"></i></span>
+                </oj-button>
+                <oj-button id="button1" on-oj-action="[[miFuncion]]">Nuevo</oj-button> 
+                <oj-button id="my-button" label="Mi botón" >Buscar</oj-button>    
+            </div>
+        </div>
+        <!-- FIN IDENTIFICACION DEFUNCION -->
+
+    </div>
+</div>
