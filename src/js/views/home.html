@@ -54,10 +54,12 @@
             </oj-form-layout>
             <div class="oj-flex oj-flex-items-end" style="gap: 1rem; justify-content: flex-end;">
                 <oj-button id='button2' >
-                    <span><oj-bind-text value="Cargar"></oj-bind-text> <i class="fa fa-search"></i></span>
+                    <span><oj-bind-text value="Cargar"></oj-bind-text></span>
                 </oj-button>
                 <oj-button id="button1" on-oj-action="[[miFuncion]]">Nuevo</oj-button> 
-                <oj-button id="my-button" label="Mi botón" >Buscar</oj-button>    
+                <oj-button id="my-button" >
+                    <span><oj-bind-text value="Buscar"></oj-bind-text> <i class="fa fa-search"></i></span>
+                </oj-button>    
             </div>
         </div>
         <!-- FIN IDENTIFICACION DEFUNCION -->

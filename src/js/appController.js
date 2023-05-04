@@ -174,9 +174,9 @@ define([
 
     // Header
     // Application Name used in Branding Area
-    self.appName = ko.observable("App Name");
+    self.appName = ko.observable("Registraduría");
     // User Info used in Global Navigation area
-    self.userLogin = ko.observable("john.hancock@oracle.com");
+    self.userLogin = ko.observable("jberrio@oracle.com");
 
     // Footer
     function footerLink(name, id, linkTarget) {

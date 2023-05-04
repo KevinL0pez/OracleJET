@@ -35,10 +35,10 @@
     
                     <oj-input-text
                         id="f3"
-                        label-hint="Segundo Apellido"
+                        label-hint="Nombres"
                         label-edge="inside"
-                        placeholder='Digite el segundo apellido del difunto'
-                        help.instruction="Digite el segundo apellido del difunto"
+                        placeholder='Digite los nombres del difunto'
+                        help.instruction="Digite los nombres del difunto"
                         required
                     ></oj-input-text>
     
@@ -46,11 +46,10 @@
                         id="f4"
                         label-hint="Sexo"
                         label-edge="inside"
+                        options="[[listaGeneros]]"
                         required
                         aria-controls="formularioDatosPersonalesDifunto"
                         class='oj-choice-direction-row' >
-                        <oj-option value="F">Mujer</oj-option>
-                        <oj-option value="M">Hombre</oj-option>
                     </oj-radioset>
     
                     <oj-input-date 
@@ -63,18 +62,11 @@
     
                     <oj-select-one 
                         id="f6"             
-                        value=""
+                        options="[[listaEstadoCivil]]"
                         label-edge="inside"
                         label-hint="Estado Civil" 
-                        required
-                        style="max-width:20em" >
-                        <oj-option value="" ></oj-option>
-                        <oj-option value="01">01 - Soltero/a</oj-option>
-                        <oj-option value="02">02 - Casado/a</oj-option>
-                        <oj-option value="03">03 - Unión libre o unión de hecho</oj-option>
-                        <oj-option value="04">04 - Separado/a</oj-option>
-                        <oj-option value="05">05 - Divorciado/a</oj-option>
-                        <oj-option value="06">06 - Viudo/a</oj-option>
+                        placeholder='Estado Civil'
+                        required >
                     </oj-select-one>
     
                     <oj-input-text
@@ -102,7 +94,9 @@
                     direction="row" >
     
                     <oj-select-single 
-                        data="[[browsersDP]]"
+                        id="seleccionpais"
+                        on-value-changed="[[cargarDepartamentos]]"
+                        data="[[listaPaises]]"
                         label-edge="inside"
                         label-hint="País de residencia"
                         placeholder='País de residencia'
@@ -110,7 +104,8 @@
                     ></oj-select-single>
                     
                     <oj-select-single 
-                        data="[[browsersDP]]"
+                        data="[[listaDepartamentos]]"
+                        on-value-changed="[[cargarCiudades]]"
                         label-edge="inside"
                         label-hint="Departamento de residencia"
                         placeholder='Departamento de residencia'
@@ -118,7 +113,8 @@
                     ></oj-select-single>
 
                     <oj-select-single 
-                        data="[[browsersDP]]"
+                        data="[[listaCiudades]]"
+                        on-value-changed="[[cargarDivisionMunicipal]]"
                         label-edge="inside"
                         label-hint="Municipio de residencia"
                         placeholder='Municipio de residencia'
@@ -126,7 +122,7 @@
                     ></oj-select-single>
 
                     <oj-select-single 
-                        data="[[browsersDP]]"
+                        data="[[listaDivisionMunicipal]]"
                         label-edge="inside"
                         label-hint="División municipal"
                         placeholder='División municipal'
@@ -174,7 +170,7 @@
                     </div>
 
                     <oj-select-single 
-                        data="[[browsersDP]]"
+                        data="[[listaPaises]]"
                         label-edge="inside"
                         label-hint="Nacionalidad del Compañero de Hogar"
                         placeholder='Nacionalidad del Compañero de Hogar'
@@ -183,14 +179,14 @@
 
                     <oj-input-text
                         label-edge="inside"
-                        label-hint="Nombres y Apellidos del Compañaero de Hogar"
-                        placeholder='Nombres y Apellidos del Compañaero de Hogar'
-                        help.instruction="Nombres y Apellidos del Compañaero de Hogar"
+                        label-hint="Nombres y Apellidos del Compañero de Hogar"
+                        placeholder='Nombres y Apellidos del Compañero de Hogar'
+                        help.instruction="Nombres y Apellidos del Compañero de Hogar"
                         required
                     ></oj-input-text>
                     
                     <oj-select-single 
-                        data="[[browsersDP]]"
+                        data="[[listaEstratoSocial]]"
                         label-edge="inside"
                         label-hint="Estatus de Vivencia"
                         placeholder='Estatus de Vivencia'
