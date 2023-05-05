@@ -5,6 +5,7 @@ const cors = require("cors");
 const oracledb = require("oracledb");
 const messages = require("../constant/messages");
 const variables = require("../constant/variables");
+const moment = require("moment");
 
 // Configuración de Express
 app.use(cors());
@@ -38,6 +39,63 @@ async function run() {
     //   res.send(navegadores);
     //   res.status(200).send("OK");
     // });
+
+    const crearDatosDifunto = async ({ primerApellido, segundoApellido, nombres, sexo, fechaNacimiento, estadoCivil, ocupacion, paisResidencia, departamentoResidencia, municipioResidencia, divisionMunicipal, direccion, numeroIdentificacion, nacionalidadFamiliar, nomapellfamiliar, estratoEconomico }) => {
+      try {
+        const sql = `INSERT INTO INFORMACION_DIFUNTO
+          (DNI, PRIMER_APELLIDO, SEGUNDO_APELLIDO, NOMBRES, GENERO, FECHA_NACIMIENTO, ESTADO_CIVIL, OCUPACION, 
+          PAIS_RESIDENCIA, DEPARTAMENTO_RESIDENCIA, MUNICIPIO_RESIDENCIA, DIVISION_MUNICIPAL, DIRECCION, 
+          NACIONALIDAD_FAMILIAR, NOM_APELL_FAMILIAR, ESTRATO_ECONOMICO)
+          VALUES (:1, :2, :3, :4, :5, TO_DATE(:6, 'YYYY-MM-DD'), :7, :8, :9, :10, :11, :12, :13, :14, :15, :16)`;
+        const bindParams = [
+          numeroIdentificacion,
+          primerApellido,
+          segundoApellido,
+          nombres,
+          sexo,
+          fechaNacimiento,
+          estadoCivil,
+          ocupacion,
+          paisResidencia,
+          departamentoResidencia,
+          municipioResidencia,
+          divisionMunicipal,
+          direccion,
+          nacionalidadFamiliar,
+          nomapellfamiliar,
+          estratoEconomico
+        ];
+        const result = await connection.execute(sql, bindParams);
+        connection.commit();
+        console.log('Registro creado con éxito');
+        return result;
+      } catch (error) {
+        console.error(error);
+        throw new Error("No se pudo registrar los datos, comprueba el registro.");
+      }
+    };
+    
+    app.post('/registrarInformacion', async (req, res) => {
+      const body = req.body;
+      try {
+        const resultado = await crearDatosDifunto(body);
+        console.log(resultado);
+        res.status(201).json({
+          messages: ['Se registro correctamente los datos.'],
+          success: true,
+          status: 201
+        });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({
+          code: 1,
+          data: {},
+          messages: ['Error al registrar los datos.'],
+          success: false,
+          status: 500
+        });
+      }
+    });
 
     const getPaises = async () => {
       try {

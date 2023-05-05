@@ -16,7 +16,9 @@
                     direction="row" >
     
                     <oj-input-text
-                        id="f1"
+                        id="primerApellido"
+                        name="primerApellido"
+                        on-value-changed="[[setValores]]"
                         label-hint="Primer Apellido"
                         label-edge="inside"
                         placeholder='Digite el primer apellido del difunto'
@@ -25,7 +27,9 @@
                     ></oj-input-text>
                     
                     <oj-input-text
-                        id="f2"
+                        id="segundoApellido"
+                        name="segundoApellido"
+                        on-value-changed="[[setValores]]"
                         label-hint="Segundo Apellido"
                         label-edge="inside"
                         placeholder='Digite el segundo apellido del difunto'
@@ -34,7 +38,8 @@
                     ></oj-input-text>
     
                     <oj-input-text
-                        id="f3"
+                        id="nombres"
+                        on-value-changed="[[setValores]]"
                         label-hint="Nombres"
                         label-edge="inside"
                         placeholder='Digite los nombres del difunto'
@@ -43,7 +48,8 @@
                     ></oj-input-text>
     
                     <oj-radioset 
-                        id="f4"
+                        id="sexo"
+                        on-value-changed="[[setValores]]"
                         label-hint="Sexo"
                         label-edge="inside"
                         options="[[listaGeneros]]"
@@ -53,7 +59,8 @@
                     </oj-radioset>
     
                     <oj-input-date 
-                        id="f5" 
+                        id="fechaNacimiento" 
+                        on-value-changed="[[setValores]]"
                         label-edge="inside"
                         label-hint="Fecha de nacimiento" 
                         required
@@ -61,7 +68,8 @@
                     ></oj-input-date>
     
                     <oj-select-one 
-                        id="f6"             
+                        id="estadoCivil"             
+                        on-value-changed="[[setValores]]"
                         options="[[listaEstadoCivil]]"
                         label-edge="inside"
                         label-hint="Estado Civil" 
@@ -70,7 +78,8 @@
                     </oj-select-one>
     
                     <oj-input-text
-                        id="f7"
+                        id="ocupacion"
+                        on-value-changed="[[setValores]]"
                         label-hint="Ocupación"
                         label-edge="inside"
                         placeholder='Digite el código o nombre de la profesión del difunto'
@@ -94,8 +103,9 @@
                     direction="row" >
     
                     <oj-select-single 
-                        id="seleccionpais"
+                        id="paisResidencia"
                         on-value-changed="[[cargarDepartamentos]]"
+                        on-value-changed="[[setValores]]"
                         data="[[listaPaises]]"
                         label-edge="inside"
                         label-hint="País de residencia"
@@ -104,8 +114,9 @@
                     ></oj-select-single>
                     
                     <oj-select-single 
+                        id="departamentoResidencia"
+                        on-value-changed="[[setValores, cargarCiudades]]"
                         data="[[listaDepartamentos]]"
-                        on-value-changed="[[cargarCiudades]]"
                         label-edge="inside"
                         label-hint="Departamento de residencia"
                         placeholder='Departamento de residencia'
@@ -113,8 +124,9 @@
                     ></oj-select-single>
 
                     <oj-select-single 
+                        id="municipioResidencia"
+                        on-value-changed="[[setValores, cargarDivisionMunicipal]]"
                         data="[[listaCiudades]]"
-                        on-value-changed="[[cargarDivisionMunicipal]]"
                         label-edge="inside"
                         label-hint="Municipio de residencia"
                         placeholder='Municipio de residencia'
@@ -122,6 +134,8 @@
                     ></oj-select-single>
 
                     <oj-select-single 
+                        id="divisionMunicipal"
+                        on-value-changed="[[setValores]]"
                         data="[[listaDivisionMunicipal]]"
                         label-edge="inside"
                         label-hint="División municipal"
@@ -130,6 +144,8 @@
                     ></oj-select-single>
 
                     <oj-input-text
+                        id="direccion"
+                        on-value-changed="[[setValores]]"
                         label-edge="inside"
                         label-hint="Dirección"
                         placeholder='Dirección'
@@ -153,6 +169,8 @@
                     direction="row" >
 
                     <oj-input-text
+                        id="numeroIdentificacion"
+                        on-value-changed="[[setValores]]"
                         label-edge="inside"
                         label-hint="Número de Identificación"
                         placeholder='Número de Identificación'
@@ -170,6 +188,8 @@
                     </div>
 
                     <oj-select-single 
+                        id="nacionalidadFamiliar"
+                        on-value-changed="[[setValores]]"
                         data="[[listaPaises]]"
                         label-edge="inside"
                         label-hint="Nacionalidad del Compañero de Hogar"
@@ -178,6 +198,8 @@
                     ></oj-select-single>
 
                     <oj-input-text
+                        id="nomapellfamiliar"
+                        on-value-changed="[[setValores]]"
                         label-edge="inside"
                         label-hint="Nombres y Apellidos del Compañero de Hogar"
                         placeholder='Nombres y Apellidos del Compañero de Hogar'
@@ -186,6 +208,8 @@
                     ></oj-input-text>
                     
                     <oj-select-single 
+                        id="estratoEconomico"
+                        on-value-changed="[[setValores]]"
                         data="[[listaEstratoSocial]]"
                         label-edge="inside"
                         label-hint="Estatus de Vivencia"
@@ -228,7 +252,7 @@
         <div class="oj-flex contenedorAcciones" >
             <div class="contendorGuardar">
                 <div class="oj-flex oj-flex-items-end" style="gap: 1rem;">
-                    <oj-button id="button1" >
+                    <oj-button id="button1" on-oj-action="[[crearDatos]]" >
                         <span><oj-bind-text value="Guardar"></oj-bind-text></span>
                     </oj-button>    
                 </div>

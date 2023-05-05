@@ -1,9 +1,27 @@
-define(['accUtils', 'knockout', 'ojs/ojarraydataprovider', 'ojs/ojrouter'],
-function(accUtils, ko, ArrayDataProvider, Router) {
+define(['accUtils', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojrouter', 'ojs/ojformlayout', 'ojs/ojbutton'],
+function(accUtils, ko, $, ArrayDataProvider, Router, ojFormLayout) {
   
   function FormulariosViewModel() {
     var self = this;
     const url = 'http://localhost:3000';
+    const DATOS_DIFUNTO = {
+      primerApellido: '',
+      segundoApellido: '',
+      nombres: '',
+      sexo: '',
+      fechaNacimiento: '',
+      estadoCivil: '',
+      ocupacion: '',
+      paisResidencia: '',
+      departamentoResidencia: '',
+      municipioResidencia: '',
+      divisionMunicipal: '',
+      direccion: '',
+      numeroIdentificacion: '',
+      nacionalidadFamiliar: '',
+      nomapellfamiliar: '',
+      estratoEconomico: ''
+    }
     self.listaGeneros = ko.observable();
     self.listaPaises = ko.observable();
     self.listaDepartamentos = ko.observable();
@@ -93,6 +111,7 @@ function(accUtils, ko, ArrayDataProvider, Router) {
 
     self.cargarDepartamentos = async function (event) {
       var valorSeleccionado = event.detail.value;
+      DATOS_DIFUNTO['paisResidencia'] = valorSeleccionado;
       try {
         const respuesta = await fetch(`${url}/departamentos?idPais=${valorSeleccionado}`, {
           method: 'GET',
@@ -111,6 +130,7 @@ function(accUtils, ko, ArrayDataProvider, Router) {
 
     self.cargarCiudades = async function (event) {
       var valorSeleccionado = event.detail.value;
+      DATOS_DIFUNTO['departamentoResidencia'] = valorSeleccionado;
       try {
         const respuesta = await fetch(`${url}/ciudades?idDepartamento=${valorSeleccionado}`, {
           method: 'GET',
@@ -129,6 +149,7 @@ function(accUtils, ko, ArrayDataProvider, Router) {
 
     self.cargarDivisionMunicipal = async function (event) {
       var valorSeleccionado = event.detail.value;
+      DATOS_DIFUNTO['municipioResidencia'] = valorSeleccionado;
       try {
         const respuesta = await fetch(`${url}/divisionMunicipal?idCiudad=${valorSeleccionado}`, {
           method: 'GET',
@@ -143,6 +164,30 @@ function(accUtils, ko, ArrayDataProvider, Router) {
       } catch (error) {
         
       }
+    }
+
+    self.crearDatos = async function () {
+      try {
+        const respuesta = await fetch(`${url}/registrarInformacion`, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(DATOS_DIFUNTO)
+        });
+        const datos = await respuesta.json();
+        console.log(datos);
+      } catch (error) {
+        
+      }
+    }
+
+    self.setValores = function (event) {
+      var valor = event.detail.value;
+      console.log(valor); 
+      var elemento = event.target.id;
+      DATOS_DIFUNTO[elemento] = valor;
     }
 
     self.disconnected = function() {

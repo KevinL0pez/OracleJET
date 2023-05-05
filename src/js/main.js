@@ -87,7 +87,8 @@ require([
   "ojs/ojcolorpalette",
   "ojs/ojlabel",
   "ojs/ojformlayout",
-  "ojs/ojlabelvalue"
+  "ojs/ojlabelvalue",
+  "ojs/ojtable"
 ], function (Bootstrap, ko, app, Router, Logger) {
   // this callback gets executed when all required modules are loaded
   Bootstrap.whenDocumentReady().then(function () {
