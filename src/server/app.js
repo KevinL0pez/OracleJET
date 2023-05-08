@@ -5,11 +5,14 @@ const cors = require("cors");
 const oracledb = require("oracledb");
 const messages = require("../constant/messages");
 const variables = require("../constant/variables");
-const moment = require("moment");
+const listEndpoints = require('express-list-endpoints');
+// const fs = require('fs');
+// const path = require('path');
 
 // Configuración de Express
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 async function run() {
   let connection;
@@ -22,23 +25,85 @@ async function run() {
       connectString: variables.CONNECTSTRING,
     });
     console.log("Conectado a Base de datos de Oracle.");
-
     // Rutas de tu microservicio
     app.get("/", (req, res) => {
-      res.send("¡Microservicio funcionando!");
+      // const homePage = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+      res.sendFile(__dirname + '/app.html');
     });
 
-    // app.get("/navegadores", (req, res) => {
-    //   const navegadores = [
-    //     { value: "IE", label: "Internet Explorer" },
-    //     { value: "FF", label: "Firefox" },
-    //     { value: "CH", label: "Chrome" },
-    //     { value: "OP", label: "Opera" },
-    //     { value: "SA", label: "Safari" },
-    //   ];
-    //   res.send(navegadores);
-    //   res.status(200).send("OK");
-    // });
+    app.get('/app.css', (req, res) => {
+      res.set('Content-Type', 'text/css');
+      res.sendFile(__dirname + '/app.css');
+    });
+
+    app.get("/servicios", (req, res) => {
+      res.send(endpoints)
+    })
+
+    const consultarInformacionDifunto = async () => {
+      try {
+        const sql = `SELECT IFD.DNI, IFD.NOMBRES, IFD.PRIMER_APELLIDO, IFD.SEGUNDO_APELLIDO, 
+        ES.NOMBRE_ESTRATO  AS ESTRATO_ECONOMICO, IFD.NOM_APELL_FAMILIAR, 
+        P.NOMBRE_PAIS AS PAIS_RESIDENCIA, D.NOMBRE_DEPARTAMENTO AS DEPARTAMENTO_RESIDENCIA, 
+        C.NOMBRE_CIUDAD AS MUNICIPIO_RESIDENCIA,IFD.DIRECCION 
+        FROM INFORMACION_DIFUNTO IFD
+        JOIN ESTRATOS_SOCIOECONOMICOS ES ON IFD.ESTRATO_ECONOMICO = ES.ESTRATO
+        JOIN PAIS P ON IFD.PAIS_RESIDENCIA = P.REFERENCIA_PAIS  
+        JOIN DEPARTAMENTO D ON IFD.DEPARTAMENTO_RESIDENCIA = D.RELACION_DEPARTAMENTO  
+        JOIN CIUDAD C ON IFD.MUNICIPIO_RESIDENCIA = C.CIUDAD_PK`;
+        const result = await connection.execute(sql);
+        const resultadosFormateados = result.rows.map(
+          ([
+            dni,
+            nombres,
+            primerApellido,
+            segundoApellido,
+            estrato,
+            nomapellFamiliar,
+            paisResidencia,
+            departamentoResidencia,
+            municipioResidencia,
+            direccion,
+          ]) => ({
+            dni,
+            nombres,
+            primerApellido,
+            segundoApellido,
+            estrato,
+            nomapellFamiliar,
+            paisResidencia,
+            departamentoResidencia,
+            municipioResidencia,
+            direccion
+          })
+        );
+        return resultadosFormateados;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Ocurrió un error en la consulta.");
+      }
+    }
+
+    app.get("/consultarInformacionDifunto", async (req, res) => {
+      try {
+        const resultadosFormateados = await consultarInformacionDifunto();
+        res.status(200).json({
+          code: 0,
+          data: resultadosFormateados,
+          messages: [messages.SUCCES],
+          success: true,
+          status: 200
+        });
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+          code: 1,
+          messages: [messages.ERROR],
+          success: false,
+          status: 500
+        });
+      }
+    });
 
     const crearDatosDifunto = async ({ primerApellido, segundoApellido, nombres, sexo, fechaNacimiento, estadoCivil, ocupacion, paisResidencia, departamentoResidencia, municipioResidencia, divisionMunicipal, direccion, numeroIdentificacion, nacionalidadFamiliar, nomapellfamiliar, estratoEconomico }) => {
       try {
@@ -89,7 +154,6 @@ async function run() {
         console.error(error);
         res.status(500).json({
           code: 1,
-          data: {},
           messages: ['Error al registrar los datos.'],
           success: false,
           status: 500
@@ -122,7 +186,6 @@ async function run() {
         console.error(error);
         return res.status(500).json({
           code: 1,
-          data: {},
           messages: [messages.ERROR],
           success: false,
           status: 500
@@ -160,7 +223,6 @@ async function run() {
         console.error(error);
         return res.status(500).json({
           code: 1,
-          data: {},
           messages: [messages.ERROR],
           success: false,
           status: 500
@@ -197,7 +259,6 @@ async function run() {
         console.error(error);
         return res.status(500).json({
           code: 1,
-          data: {},
           messages: [messages.ERROR],
           success: false,
           status: 500
@@ -234,7 +295,6 @@ async function run() {
         console.error(error);
         return res.status(500).json({
           code: 1,
-          data: {},
           messages: [messages.ERROR],
           success: false,
           status: 500
@@ -269,7 +329,6 @@ async function run() {
         console.error(error);
         return res.status(500).json({
           code: 1,
-          data: {},
           messages: [messages.ERROR],
           success: false,
           status: 500
@@ -304,7 +363,6 @@ async function run() {
         console.error(error);
         return res.status(500).json({
           code: 1,
-          data: {},
           messages: [messages.ERROR],
           success: false,
           status: 500
@@ -339,7 +397,6 @@ async function run() {
         console.error(error);
         return res.status(500).json({
           code: 1,
-          data: {},
           messages: [messages.ERROR],
           success: false,
           status: 500
@@ -362,6 +419,13 @@ async function run() {
       }
     }
   }
+
+  // Obtiene la lista de todos los endpoints disponibles
+  const endpoints = listEndpoints(app);
+
+  // Imprime la lista de endpoints disponibles en la consola
+  console.log("endpoints", endpoints);
+
 }
 
 run();
