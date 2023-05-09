@@ -88,7 +88,14 @@ require([
   "ojs/ojlabel",
   "ojs/ojformlayout",
   "ojs/ojlabelvalue",
-  "ojs/ojtable"
+  "ojs/ojtable",
+  "ojs/ojtoolbar",
+  "ojs/ojpopup",
+  "ojs/ojmessages",
+  "ojs/ojresponsiveknockoututils",
+  "ojs/ojresponsiveutils",
+  "ojs/ojcontext"
+
 ], function (Bootstrap, ko, app, Router, Logger) {
   // this callback gets executed when all required modules are loaded
   Bootstrap.whenDocumentReady().then(function () {

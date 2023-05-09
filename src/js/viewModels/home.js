@@ -53,7 +53,7 @@ define([
         detail: 'Warning message detail'
       },
       {
-        severity: 'Éxito',
+        severity: 'confirmation',
         summary: '¡Se ha registrado correctamente la información!'
       },
       {
@@ -62,7 +62,37 @@ define([
         detail: 'Info message detail'
       }];
 
-    this.messagesDataprovider = new ArrayDataProvider(this.messages);
+    self.messagesDataprovider = new oj.ArrayDataProvider(this.messages);
+
+    self.mostrarMensaje = function () {
+
+      // document.getElementById('myButton').addEventListener('click', function() {
+        var notificationContainer = document.getElementById('notificationContainer');
+        
+        // Crea un elemento div para la notificación
+        var notification = document.createElement('div');
+        notification.classList.add('oj-message', 'oj-message-confirmation');
+        
+        // Agrega el contenido de la notificación
+        notification.innerHTML = '<oj-messages messages="[[messagesDataprovider]]" position="{}" display="notification"></oj-messages>';
+        
+        // Agrega la notificación al contenedor y muéstrala
+        notificationContainer.appendChild(notification);
+        setTimeout(function() {
+          notification.classList.add('oj-message-shown');
+        }, 100);
+        
+        // Después de 5 segundos, oculta y elimina la notificación
+        setTimeout(function() {
+          notification.classList.remove('oj-message-shown');
+          setTimeout(function() {
+            notificationContainer.removeChild(notification);
+          }, 300);
+        }, 5000);
+      // });
+    }
+
+    
 
     const cols = [
       {

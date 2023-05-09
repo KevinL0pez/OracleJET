@@ -1,7 +1,3 @@
-<!-- Messages -->
-<oj-messages messages="[[messagesDataprovider]]" position="{}" display="notification">
-</oj-messages>
-
 <oj-bind-if test="!estadoFormulario()" >
     <div class="oj-hybrid-padding"  >
         <div class="oj-flex-item" >
@@ -58,7 +54,7 @@
                     ></oj-input-number>
                 </oj-form-layout>
                 <div class="oj-flex oj-flex-items-end" style="gap: 1rem; justify-content: flex-end;">
-                    <oj-button id='button2' >
+                    <oj-button id='button2' on-oj-action="[[mostrarMensaje]]"  >
                         <span><oj-bind-text value="Cargar"></oj-bind-text></span>
                     </oj-button>
                     <oj-button id="button1" on-oj-action="[[cambiarVistaFormulario]]">Nuevo</oj-button> 
